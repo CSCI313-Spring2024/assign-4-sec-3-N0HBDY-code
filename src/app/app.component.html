@@ -1,1 +1,85 @@
-<div>Hello World!</div>
+<div class="container w-50 py-4">
+    <h1>Contact Manager</h1>
+  
+    <!-- View Toggle Buttons -->
+    <div class="mb-3">
+      <button class="btn btn-outline-success me-2" (click)="switchToListMode()">Contact List</button>
+      <button class="btn btn-outline-primary" (click)="switchToAddMode()">Add Contact</button>
+    </div>
+  
+    <!-- Contact List -->
+    @if (showContactList) {
+      <h2>Contacts</h2>
+      @for (user of users; track user.id) {
+        <div class="card shadow-sm rounded-3 mb-3">
+          <div class="card-body">
+            <h5 class="card-title mb-2">{{ user.firstName }} {{ user.lastName }}</h5>
+            <p class="card-text mb-1">{{ user.phone }}</p>
+  
+            <div class="d-flex justify-content-end gap-2 mt-3">
+              <button class="btn btn-primary btn-sm rounded-pill px-3" (click)="setEditUser(user)">Edit</button>
+              <button class="btn btn-danger btn-sm rounded-pill px-3" (click)="deleteUser(user.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      }
+    } @else {
+      <!-- Edit Mode -->
+      @if (editUserId) {
+        <h2>Edit Contact</h2>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="user.firstName"
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="user.lastName"
+            placeholder="Last Name"
+          />
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="user.phone"
+            placeholder="Phone Number"
+          />
+          <button class="btn btn-outline-success me-2" (click)="updateUser(user)">Update Contact</button>
+          <button class="btn btn-outline-info" (click)="resetForm()">Reset</button>
+        </div>
+      } @else {
+        <!-- Add Mode -->
+        <h2>Add Contact</h2>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="user.firstName"
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="user.lastName"
+            placeholder="Last Name"
+          />
+          <input
+            type="text"
+            class="form-control mb-2"
+            [(ngModel)]="user.phone"
+            placeholder="Phone Number"
+          />
+          <button
+            class="btn btn-outline-primary"
+            (click)="addUser()"
+            [disabled]="!user.firstName?.trim() || !user.lastName?.trim()"
+          >
+            Add Contact
+          </button>
+        </div>
+      }
+    }
+  </div>
+  
