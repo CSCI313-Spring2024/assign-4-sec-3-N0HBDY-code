@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "assignment-4": {
+    "practice-firestore-crud": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/assignment-4",
+            "outputPath": "dist/practice-firestore-crud",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -27,6 +27,7 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -59,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "assignment-4:build:production"
+              "buildTarget": "practice-firestore-crud:build:production"
             },
             "development": {
-              "buildTarget": "assignment-4:build:development"
+              "buildTarget": "practice-firestore-crud:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,8 +90,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
